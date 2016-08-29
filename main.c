@@ -6,14 +6,13 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 15:47:57 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/08/29 19:16:37 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/08/29 21:29:40 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
-#include "libvect/libvect.h"
-#include "libft/libft.h"
 #include "fdf.h"
+#include "libft/libft.h"
 
 void		test_parsing(t_fdf *fdf)
 {
@@ -26,7 +25,6 @@ void		test_parsing(t_fdf *fdf)
 		while (x < fdf->map->used)
 		{
 			ft_memcpy(&nbr, fdf->map->data + x, 4);
-			printf("%u\n", nbr);
 			x += 4;
 		}
 		fdf->y--;
@@ -56,7 +54,7 @@ int			main(int argc, char **argv)
 	fd = parse_args(argc, argv);
 	fdf.map = &map;
 	map_parse(fd, &fdf);
-	printf("map size: %lu\n", map.used);
 	test_parsing(&fdf);
+	fdf_init(&fdf);
 	return (0);
 }
