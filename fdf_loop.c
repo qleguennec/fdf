@@ -1,43 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_init.c                                         :+:      :+:    :+:   */
+/*   fdf_loop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/29 20:45:18 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/08/30 00:05:12 by qle-guen         ###   ########.fr       */
+/*   Created: 2016/08/29 22:09:34 by qle-guen          #+#    #+#             */
+/*   Updated: 2016/08/29 23:55:41 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include <stdio.h>
 #include "fdf.h"
 
-int				fdf_keys(int keycode, void *param)
+int				fdf_loop(void *param)
 {
 	t_fdf		*fdf;
 
 	fdf = param;
-	printf("%d\n", keycode);
-	if (keycode == 53)
-	{
-		mlx_destroy_window(fdf->mlx, fdf->win);
-		exit(0);
-	}
+	if (fdf->exp)
+		map_draw(fdf);
 	return (1);
-}
-
-void			fdf_init(t_fdf *fdf)
-{
-	fdf->mlx = mlx_init();
-	if (!fdf->mlx)
-		fdf_exit();
-	fdf->win = mlx_new_window(fdf->mlx, WIN_X, WIN_Y, WIN_NAME);
-	if (!fdf->win)
-		fdf_exit();
-	fdf->exp = 1;
-	mlx_key_hook(fdf->win, &fdf_keys, fdf);
-	mlx_loop_hook(fdf->mlx, &fdf_loop, fdf);
-	mlx_loop(fdf->mlx);
 }

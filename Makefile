@@ -20,8 +20,11 @@ WHITE		=	"\033[0;37m"
 END			=	"\033[0m"
 
 SRC += fdf_init.c
+SRC += map_draw.c
 SRC += map_parse.c
 SRC += main.c
+SRC += fdf_loop.c
+SRC += x_draw_line.c
 SRC += fdf_exit.c
 
 LIB += libgnl.a
