@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 15:52:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/08/30 00:05:22 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/08/30 09:25:48 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,39 @@
 #include "libft/libft.h"
 #include <limits.h>
 #include "fdf.h"
+#include <math.h>
 
-unsigned int	vect_getnbr(t_vect *v, size_t *start)
+static unsigned int		get_next_nbr
+	(t_vect *v, size_t *start, unsigned long ul_pow)
 {
-	unsigned long	ret;
-	unsigned long	pow;
-	char			dig;
-	size_t			i;
-	size_t			read;
+	int		dig;
 
+	if (*start == v->used)
+		return (1);
+	dig = ((char *)v->data)[*start];
+	if (dig == ' ')
+		return (1);
+	if (!ft_isdigit(dig))
+		fdf_exit();
+	(*start)++;
+	return ((dig - '0') * get_next_nbr(v, start, ul_pow / 10));
+}
+
+static unsigned int		vect_getnbr(t_vect *v, size_t *start)
+{
+	size_t	i;
+
+	while (*start < v->used && ((char *)v->data)[*start] == ' ')
+		(*start)++;
 	i = *start;
 	while (i < v->used && ((char *)v->data)[i] != ' ')
 		i++;
-	read = i + 1;
-	ret = 0;
-	pow = 1;
-	while (i != *start)
-	{
-		dig = ((char *)v->data)[--i];
-		if (!ft_isdigit(dig))
-			fdf_exit();
-		ret += pow * (dig - '0');
-		if (ret > UINT_MAX)
-			fdf_exit();
-		pow *= 10;
-	}
-	while (((char *)v->data)[read] == ' ')
-		read++;
-	*start = read;
-	return (ret);
+	if (i == *start)
+		return (-1);
+	return (get_next_nbr(v, start, pow(10, i)));
 }
 
-int				parse_line(t_vect *line, t_fdf *fdf)
+static int				parse_line(t_vect *line, t_fdf *fdf)
 {
 	size_t			start;
 	size_t			x;
@@ -56,6 +57,8 @@ int				parse_line(t_vect *line, t_fdf *fdf)
 	while (start < line->used)
 	{
 		nbr = vect_getnbr(line, &start);
+		if (nbr == (unsigned int)-1)
+			break ;
 		vect_add(fdf->map, &nbr, sizeof(int));
 		x++;
 	}
@@ -63,7 +66,7 @@ int				parse_line(t_vect *line, t_fdf *fdf)
 	return (x);
 }
 
-void			map_parse(int fd, t_fdf *fdf)
+void					map_parse(int fd, t_fdf *fdf)
 {
 	t_vect		line;
 	t_vect		gnl;
@@ -75,6 +78,8 @@ void			map_parse(int fd, t_fdf *fdf)
 	while ((gnl_ret = get_next_line(fd, &gnl, &line)) != 0)
 	{
 		if (gnl_ret < 0)
+			fdf_exit();
+		if (!line.used)
 			fdf_exit();
 		x = parse_line(&line, fdf);
 		if (!fdf->x)

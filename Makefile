@@ -19,12 +19,15 @@ CYAN		=	"\033[0;36m"
 WHITE		=	"\033[0;37m"
 END			=	"\033[0m"
 
+SRC += obj_grid.c
 SRC += fdf_init.c
 SRC += map_draw.c
 SRC += map_parse.c
 SRC += main.c
 SRC += fdf_loop.c
 SRC += x_draw_line.c
+SRC += obj_init.c
+SRC += obj_display.c
 SRC += fdf_exit.c
 
 LIB += libgnl.a
@@ -59,7 +62,7 @@ $(BUILDDIR)/%.o: %.c
 
 $(NAME): $(OBJECTS) $(LIBRARIES)
 	@printf $(BLUE)$(PROJECT)$(END)'\t'
-	$(CC) $(CFLAGS) $(MLXFLAGS) -L$(BUILDDIR) $(LIBLINK) $(OBJECTS) $(LIBLINK) -o $(NAME)
+	@$(CC) $(CFLAGS) $(MLXFLAGS) -L$(BUILDDIR) $(LIBLINK) $(OBJECTS) $(LIBLINK) -o $(NAME)
 	@echo "OK\t"$(NAME)
 
 .PHONY: clean fclean re
