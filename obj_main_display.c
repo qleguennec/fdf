@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_init.c                                         :+:      :+:    :+:   */
+/*   obj_main_display.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/30 20:28:44 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/08/30 21:20:32 by qle-guen         ###   ########.fr       */
+/*   Created: 2016/08/30 13:34:45 by qle-guen          #+#    #+#             */
+/*   Updated: 2016/08/30 21:33:23 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libmlx/mlx.h"
-#include "libft/libft.h"
 
-void			obj_init(t_obj *obj, int w, int h, t_fdf *fdf)
+void		obj_main_display(t_fdf *fdf)
 {
-	int			dummy;
-
-	ft_bzero(obj, sizeof(*obj));
-	obj->img = mlx_new_image(fdf->mlx, w, h);
-	obj->data = (int *)mlx_get_data_addr(obj->img, &dummy, &dummy, &dummy);
-	obj->size.x = w;
-	obj->size.y = h;
+	mlx_put_image_to_window(
+		fdf->mlx
+		, fdf->win
+		, fdf->obj.img
+		, fdf->obj.pos.x
+		, fdf->obj.pos.y
+	);
 }

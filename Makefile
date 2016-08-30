@@ -19,15 +19,15 @@ CYAN		=	"\033[0;36m"
 WHITE		=	"\033[0;37m"
 END			=	"\033[0m"
 
-SRC += obj_grid.c
 SRC += fdf_init.c
 SRC += map_draw.c
 SRC += map_parse.c
 SRC += main.c
 SRC += fdf_loop.c
-SRC += x_draw_line.c
 SRC += obj_init.c
-SRC += obj_display.c
+SRC += obj_main_pixel_put.c
+SRC += obj_main_draw_line.c
+SRC += obj_main_display.c
 SRC += fdf_exit.c
 
 LIB += libgnl.a

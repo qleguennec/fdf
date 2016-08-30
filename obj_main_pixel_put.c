@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_display.c                                      :+:      :+:    :+:   */
+/*   obj_main_pixel_put.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/30 13:34:45 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/08/30 13:57:52 by qle-guen         ###   ########.fr       */
+/*   Created: 2016/08/30 19:44:47 by qle-guen          #+#    #+#             */
+/*   Updated: 2016/08/30 21:28:51 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libmlx/mlx.h"
 
-void		obj_display(t_fdf *fdf)
+void			obj_main_pixel_put
+	(int x, int y, t_fdf *fdf, unsigned int color)
 {
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->obj
-		, fdf->obj_coords.x, fdf->obj_coords.y);
+	assert(x >= 0 && x <= fdf->obj.size.x);
+	assert(y >= 0 && y <= fdf->obj.size.y);
+	fdf->obj.data[fdf->obj.size.x * y + x] = color;
 }
