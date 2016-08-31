@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 15:47:57 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/08/30 00:05:38 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/08/31 16:26:25 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,15 @@ int			main(int argc, char **argv)
 {
 	int		fd;
 	t_vect	map;
+	t_vect	proj;
 	t_fdf	fdf;
 
 	ft_bzero(&fdf, sizeof(fdf));
 	ft_bzero(&map, sizeof(map));
+	ft_bzero(&proj, sizeof(proj));
 	fd = parse_args(argc, argv);
 	fdf.map = &map;
+	fdf.proj = &proj;
 	map_parse(fd, &fdf);
 	fdf_init(&fdf);
 	return (0);

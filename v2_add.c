@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_loop.c                                         :+:      :+:    :+:   */
+/*   v2_add.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/29 22:09:34 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/08/31 22:04:44 by qle-guen         ###   ########.fr       */
+/*   Created: 2016/08/31 16:43:15 by qle-guen          #+#    #+#             */
+/*   Updated: 2016/08/31 17:20:16 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libmlx/mlx.h"
 
-int				fdf_loop(t_fdf *fdf)
+t_v2		v2_add(t_v2 a, t_v2 b)
 {
-	if (!fdf->exp)
-		return (1);
-	obj_main_display(fdf);
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->obj.img
-		, fdf->obj.pos.x
-		, fdf->obj.pos.y);
-	fdf->exp = 0;
-	return (0);
+	t_v2	c;
+
+	c.x = a.x + b.x;
+	c.y = a.y + b.y;
+	return (c);
 }

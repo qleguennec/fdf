@@ -6,15 +6,16 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 15:52:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/08/30 09:25:48 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/08/31 15:45:40 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libgnl/libgnl.h"
-#include "libft/libft.h"
 #include <limits.h>
-#include "fdf.h"
 #include <math.h>
+#include <stdlib.h>
+#include "libft/libft.h"
+#include "libgnl/libgnl.h"
+#include "fdf.h"
 
 static unsigned int		get_next_nbr
 	(t_vect *v, size_t *start, unsigned long ul_pow)
@@ -22,14 +23,14 @@ static unsigned int		get_next_nbr
 	int		dig;
 
 	if (*start == v->used)
-		return (1);
+		return (0);
 	dig = ((char *)v->data)[*start];
 	if (dig == ' ')
-		return (1);
+		return (0);
 	if (!ft_isdigit(dig))
 		fdf_exit();
 	(*start)++;
-	return ((dig - '0') * get_next_nbr(v, start, ul_pow / 10));
+	return (ul_pow * (dig - '0') + get_next_nbr(v, start, ul_pow / 10));
 }
 
 static unsigned int		vect_getnbr(t_vect *v, size_t *start)
@@ -43,7 +44,7 @@ static unsigned int		vect_getnbr(t_vect *v, size_t *start)
 		i++;
 	if (i == *start)
 		return (-1);
-	return (get_next_nbr(v, start, pow(10, i)));
+	return (get_next_nbr(v, start, pow(10, i - 1 - *start)));
 }
 
 static int				parse_line(t_vect *line, t_fdf *fdf)
@@ -88,4 +89,6 @@ void					map_parse(int fd, t_fdf *fdf)
 			fdf_exit();
 		line.used = 0;
 	}
+	free(line.data);
+	free(gnl.data);
 }

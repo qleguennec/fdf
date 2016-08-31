@@ -6,7 +6,7 @@ NAME		=	$(BINDIR)/fdf
 
 # Compiler options
 CC			=	clang
-CFLAGS		=	$(addprefix -I,$(INCLUDE)) -Wall -Wextra -Werror -g
+CFLAGS		=	$(addprefix -I,$(INCLUDE)) -Wall -Wextra -Werror -g -Wno-unused
 
 # Color output
 BLACK		=	"\033[0;30m"
@@ -20,15 +20,18 @@ WHITE		=	"\033[0;37m"
 END			=	"\033[0m"
 
 SRC += fdf_init.c
-SRC += map_draw.c
+SRC += proj_compute.c
+SRC += v2_transform.c
 SRC += map_parse.c
 SRC += main.c
 SRC += fdf_loop.c
-SRC += obj_init.c
 SRC += obj_main_pixel_put.c
 SRC += obj_main_draw_line.c
+SRC += obj_main_init.c
 SRC += obj_main_display.c
 SRC += fdf_exit.c
+SRC += v2_abs.c
+SRC += v2_add.c
 
 LIB += libgnl.a
 LIB += libvect.a
