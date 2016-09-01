@@ -19,19 +19,24 @@ CYAN		=	"\033[0;36m"
 WHITE		=	"\033[0;37m"
 END			=	"\033[0m"
 
+SRC += v2_scale.c
+SRC += fdf_keys.c
+SRC += mat_apply.c
 SRC += fdf_init.c
 SRC += proj_compute.c
-SRC += v2_transform.c
 SRC += map_parse.c
 SRC += main.c
 SRC += fdf_loop.c
+SRC += mat_rot_init.c
 SRC += obj_main_pixel_put.c
 SRC += obj_main_draw_line.c
+SRC += v3_transform.c
 SRC += obj_main_init.c
 SRC += obj_main_display.c
 SRC += fdf_exit.c
 SRC += v2_abs.c
 SRC += v2_add.c
+
 
 LIB += libgnl.a
 LIB += libvect.a

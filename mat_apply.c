@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   v2_abs.c                                           :+:      :+:    :+:   */
+/*   mat_apply.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/31 18:55:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/01 13:11:36 by qle-guen         ###   ########.fr       */
+/*   Created: 2016/09/01 16:57:21 by qle-guen          #+#    #+#             */
+/*   Updated: 2016/09/01 19:24:00 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_v2		v2_abs(t_v2 a)
+t_v3	mat_apply(t_v3 v3, double *mat)
 {
-	t_v2	b;
+	t_v3	v3_r;
 
-	b.x = ABS(a.x);
-	b.y = ABS(a.y);
-	return (b);
+	v3_r.x = v3.x * mat[0] + v3.y * mat[1] + v3.z * mat[2];
+	v3_r.y = v3.x * mat[3] + v3.y * mat[4] + v3.z * mat[5];
+	v3_r.z = v3.x * mat[6] + v3.y * mat[7] + v3.z * mat[8];
+	return (v3_r);
 }

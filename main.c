@@ -6,13 +6,13 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 15:47:57 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/08/31 16:26:25 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/01 13:11:00 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
+#include "libmlx/mlx.h"
 #include "fdf.h"
-#include "libft/libft.h"
 
 int			parse_args(int argc, char **argv)
 {
@@ -31,6 +31,7 @@ int			main(int argc, char **argv)
 	int		fd;
 	t_vect	map;
 	t_vect	proj;
+	t_obj	obj;
 	t_fdf	fdf;
 
 	ft_bzero(&fdf, sizeof(fdf));
@@ -39,7 +40,11 @@ int			main(int argc, char **argv)
 	fd = parse_args(argc, argv);
 	fdf.map = &map;
 	fdf.proj = &proj;
+	fdf.obj = &obj;
 	map_parse(fd, &fdf);
 	fdf_init(&fdf);
+	mlx_key_hook(fdf.win, &fdf_keys, &fdf);
+	mlx_loop_hook(fdf.mlx, &fdf_loop, &fdf);
+	mlx_loop(fdf.mlx);
 	return (0);
 }

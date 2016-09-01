@@ -6,14 +6,13 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 15:52:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/08/31 15:45:40 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/01 13:11:06 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include <math.h>
 #include <stdlib.h>
-#include "libft/libft.h"
 #include "libgnl/libgnl.h"
 #include "fdf.h"
 

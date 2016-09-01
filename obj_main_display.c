@@ -6,16 +6,14 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/30 13:34:45 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/08/31 22:29:25 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/01 19:30:14 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libmlx/mlx.h"
-#include "libft/libft.h"
 
-
-static void	draw_points(t_fdf *fdf)
+static void	draw_points(t_fdf *fdf, unsigned int color)
 {
 	size_t	i;
 	t_v2	*v2;
@@ -23,39 +21,75 @@ static void	draw_points(t_fdf *fdf)
 	i = 0;
 	v2 = fdf->proj->data;
 	while (i < fdf->proj->used / sizeof(v2))
-		obj_main_pixel_put(v2[i++], fdf, 0xcc66ff);
+		obj_main_pixel_put(v2[i++], fdf, color);
 }
 
-static void	draw_map(t_fdf *fdf)
+static void	draw_map(t_fdf *fdf, unsigned int color)
 {
 	size_t	i;
 	t_v2	*v2;
 
 	i = 0;
 	v2 = fdf->proj->data;
-	while (i < fdf->proj->used / sizeof(v2) - sizeof(v2))
+	while (i < fdf->proj->used / sizeof(v2))
 	{
-		obj_main_draw_line(v2[i], v2[i + 1], fdf, BASE_COL);
+		obj_main_draw_line(v2[i], v2[i + 1], fdf, color);
+		//obj_main_draw_line(v2[i + fdf->obj->size.x], v2[i], fdf, color);
 		i++;
-		obj_main_draw_line(v2[i], v2[i + 1], fdf, BASE_COL);
+		//obj_main_draw_line(v2[i], v2[i], fdf, color);
 	}
 }
 
-static void	draw_frame(t_fdf *fdf)
+static void	draw_frame(t_fdf *fdf, unsigned int color)
 {
 	t_v2	v2;
+	t_v2	a;
+	t_v2	b;
+	t_v2	c;
+	t_v2	d;
 
 	ft_bzero(&v2, sizeof(v2));
-	v2.y = 10;
-	while (v2.x < fdf->obj.size.x)
-	{
-		obj_main_pixel_put(v2, fdf, BASE_COL);
-		v2.x++;
-	}
+	a.x = 0;
+	a.y = 0;
+	b.x = fdf->obj->size.x;
+	b.y = 0;
+	c.x = fdf->obj->size.x;
+	c.y = fdf->obj->size.y;
+	d.x = 0;
+	d.y = fdf->obj->size.y;
+	obj_main_draw_line(a, b, fdf, color);
+	obj_main_draw_line(c, b, fdf, color);
+	obj_main_draw_line(d, c, fdf, color);
+	obj_main_draw_line(a, d, fdf, color);
+//	while (v2.x < fdf->obj->size.x)
+//	{
+//		obj_main_pixel_put(v2, fdf, color);
+//		v2.x++;
+//	}
+//	v2.x--;
+//	while (v2.y < fdf->obj->size.y)
+//	{
+//		obj_main_pixel_put(v2, fdf, color);
+//		v2.y++;
+//	}
+//	v2.y--;
+//	while (v2.x >= 0)
+//	{
+//		obj_main_pixel_put(v2, fdf, color);
+//		v2.x--;
+//	}
+//	v2.x++;
+//	while (v2.y >= 0)
+//	{
+//		obj_main_pixel_put(v2, fdf, color);
+//		v2.y--;
+//	}
+//	v2.x++;
 }
 
 void		obj_main_display(t_fdf *fdf)
 {
-	draw_points(fdf);
+	draw_map(fdf, 0xff6600);
+	//draw_points(fdf, 0xffffff);
 	return ;
 }
