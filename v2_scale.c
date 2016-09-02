@@ -6,17 +6,18 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/31 18:52:48 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/01 17:09:24 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/02 14:11:07 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <math.h>
 
 t_v2		v2_scale(t_v2 a, double x)
 {
 	t_v2	b;
 
-	b.x = a.x * x;
-	b.y = a.y * x;
+	b.x = nearbyint(a.x * x);
+	b.y = nearbyint(a.y * x);
 	return (b);
 }

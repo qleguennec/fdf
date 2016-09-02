@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/30 13:34:45 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/01 19:30:14 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/02 16:19:49 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	draw_frame(t_fdf *fdf, unsigned int color)
 
 void		obj_main_display(t_fdf *fdf)
 {
-	draw_map(fdf, 0xff6600);
-	//draw_points(fdf, 0xffffff);
+	draw_map(fdf, 0xffffff);
+	draw_points(fdf, 0xffffff);
 	return ;
 }

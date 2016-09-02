@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 16:07:00 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/01 19:29:16 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/02 14:54:56 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,12 @@
 # define WIN_X		1000
 # define WIN_Y		1000
 # define WIN_NAME	"fdf"
-# define DD			30
-# define IMG_DX		30
-# define IMG_DY		30
-# define SX			0.5
-# define SZ			0.5
 # define BASE_COL	0x00FF
 # define ROT		M_PI_2
 
-# define DX			ABS(b.x - a.x)
-# define DY			ABS(b.y - a.y)
+# define PIX(p)		obj_main_pixel_put(a, fdf, color)
+# define DX			(b.x - a.x)
+# define DY			(b.y - a.y)
 
 typedef struct		s_v2
 {
@@ -85,6 +81,6 @@ void				obj_main_display(t_fdf *fdf);
 void				obj_main_draw_line(t_v2 a, t_v2 b, t_fdf *fdf, unsigned int color);
 void				obj_main_frame(t_fdf *fdf); //debug
 void				obj_main_init(t_fdf *fdf);
-void				obj_main_pixel_put(t_v2 a, t_fdf *fdf, unsigned int color);
+int					obj_main_pixel_put(t_v2 a, t_fdf *fdf, unsigned int color);
 
 #endif
