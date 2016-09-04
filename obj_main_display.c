@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/30 13:34:45 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/02 16:19:49 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/04 20:09:35 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,8 @@ static void	draw_map(t_fdf *fdf, unsigned int color)
 	while (i < fdf->proj->used / sizeof(v2))
 	{
 		obj_main_draw_line(v2[i], v2[i + 1], fdf, color);
-		//obj_main_draw_line(v2[i + fdf->obj->size.x], v2[i], fdf, color);
+		obj_main_draw_line(v2[i], v2[i + fdf->obj->size.x], fdf, color);
 		i++;
-		//obj_main_draw_line(v2[i], v2[i], fdf, color);
 	}
 }
 
