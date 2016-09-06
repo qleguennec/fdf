@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/30 13:34:45 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/06 14:16:42 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/06 18:02:02 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	draw_map(t_fdf *fdf, unsigned int color)
 	{
 		if ((i + 1) % fdf->x)
 			obj_main_draw_line(v2[i], v2[i + 1], fdf, color);
-		if ((i + fdf->x) != fdf->y)
+		if ((i + fdf->x) < fdf->proj->used / sizeof(*v2))
 			obj_main_draw_line(v2[i], v2[i + fdf->x], fdf, color);
 		i++;
 	}
@@ -62,7 +62,7 @@ static void	draw_frame(t_fdf *fdf, unsigned int color)
 	d.x = 0;
 	d.y = fdf->obj->size.y;
 	obj_main_draw_line(a, b, fdf, color);
-	obj_main_draw_line(c, b, fdf, color);
+	obj_main_draw_line(b, c, fdf, color);
 	obj_main_draw_line(d, c, fdf, color);
 	obj_main_draw_line(a, d, fdf, color);
 //	while (v2.x < fdf->obj->size.x)
@@ -94,6 +94,6 @@ static void	draw_frame(t_fdf *fdf, unsigned int color)
 void		obj_main_display(t_fdf *fdf)
 {
 	draw_map(fdf, 0xffffff);
-	draw_points(fdf, 0xff0000);
+	//draw_points(fdf, 0xff0000);
 	return ;
 }

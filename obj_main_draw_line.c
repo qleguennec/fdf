@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 22:55:27 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/06 14:23:25 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/06 17:51:59 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static void		bresen_x
 void			obj_main_draw_line
 	(t_v2 a, t_v2 b, t_fdf *fdf, unsigned int color)
 {
-	printf("a=%d %d, b=%d %d\n", a.x, a.y, b.x, b.y);
 	if (DX < DY)
 		bresen_y(a, b, fdf, color);
 	else
