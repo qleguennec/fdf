@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 15:52:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/06 14:34:33 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/06 19:20:32 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 #include "libgnl/libgnl.h"
 #include "fdf.h"
 
-static unsigned int		get_next_nbr
-	(t_vect *v, size_t *start, unsigned long ul_pow)
+static long			get_next_nbr
+	(t_vect *v, size_t *start, long ul_pow)
 {
 	int		dig;
 
 	if (*start == v->used)
 		return (0);
 	dig = ((char *)v->data)[*start];
-	if (dig == ' ')
+	if (ft_isspace(dig))
 		return (0);
 	if (!ft_isdigit(dig))
 		fdf_exit();
@@ -32,33 +32,39 @@ static unsigned int		get_next_nbr
 	return (ul_pow * (dig - '0') + get_next_nbr(v, start, ul_pow / 10));
 }
 
-static unsigned int		vect_getnbr(t_vect *v, size_t *start)
+static int			vect_getnbr(t_vect *v, size_t *start, int *nbr)
 {
 	size_t	i;
+	int		neg;
+	long	tmp;
 
-	while (*start < v->used && ((char *)v->data)[*start] == ' ')
+	neg = 0;
+	while (*start < v->used && ft_isspace(((char *)v->data)[*start]))
 		(*start)++;
+	if (((char *)v->data)[*start] == '-' && (*start)++)
+		neg = 1;
 	i = *start;
-	while (i < v->used && ((char *)v->data)[i] != ' ')
+	while (i < v->used && !ft_isspace(((char *)v->data)[i]))
 		i++;
 	if (i == *start)
-		return (-1);
-	return (get_next_nbr(v, start, pow(10, i - 1 - *start)));
+		return (0);
+	tmp = (neg ? -1 : 1) * get_next_nbr(v, start, pow(10, i - 1 - *start));
+	if (tmp < INT_MIN || tmp > INT_MAX)
+		fdf_exit();
+	*nbr = (int)tmp;
+	return (1);
 }
 
 static int				parse_line(t_vect *line, t_fdf *fdf)
 {
 	size_t			start;
 	size_t			x;
-	unsigned int	nbr;
+	int				nbr;
 
 	start = 0;
 	x = 0;
-	while (start < line->used)
+	while (vect_getnbr(line, &start, &nbr))
 	{
-		nbr = vect_getnbr(line, &start);
-		if (nbr == (unsigned int)-1)
-			break ;
 		vect_add(fdf->map, &nbr, sizeof(int));
 		x++;
 	}
@@ -87,7 +93,7 @@ void					map_parse(int fd, t_fdf *fdf)
 		if (gnl_ret < 0)
 			fdf_exit();
 		if (!line.used)
-			fdf_exit();
+			continue ;
 		x = parse_line(&line, fdf);
 		if (!fdf->x)
 			fdf->x = x;
