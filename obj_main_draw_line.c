@@ -6,134 +6,69 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 22:55:27 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/04 20:06:44 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/06 14:23:25 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libmlx/mlx.h"
 
-static void		bresen1
+static void		bresen_y
 	(t_v2 a, t_v2 b, t_fdf *fdf, unsigned int color)
 {
+	int			d;
 	t_v2		dd;
-	int			e;
+	t_v2		inc;
+	int			xinc;
 
-	dd.x = DX * 2;
-	dd.y = DY * 2;
-	if (dd.x >= dd.y)
+	if (a.y > b.y)
+		return (bresen_y(b, a, fdf, color));
+	xinc = b.x > a.x ? 1 : -1;
+	dd.y = DY;
+	dd.x = ABS(DX);
+	d = 2 * dd.x - dd.y;
+	inc.x = 2 * (dd.x - dd.y);
+	inc.y = 2 * dd.x;
+	while (a.y < b.y && PIX(a))
 	{
-		e = DX;
-		while (PIX(a) && ++a.x <= b.x)
-		{
-			if ((e -= dd.y) < 0 && ((e += dd.x) || 1))
-				a.y++;
-		}
-	}
-	else
-	{
-		e = DY;
-		while (PIX(a) && ++a.y <= b.y)
-		{
-			if ((e -= dd.x) < 0 && ((e += dd.y) || 1))
-				a.x++;
-		}
+		if (d > 0)
+			a.x += xinc;
+		d += d > 0 ? inc.x : inc.y;
+		a.y++;
 	}
 }
 
-static void		bresen2
+static void		bresen_x
 	(t_v2 a, t_v2 b, t_fdf *fdf, unsigned int color)
 {
+	int			d;
 	t_v2		dd;
-	int			e;
+	t_v2		inc;
+	int			yinc;
 
-	dd.x = DX * 2;
-	dd.y = DY * 2;
-	if (dd.x >= - dd.y)
+	if (a.x > b.x)
+		return (bresen_x(b, a, fdf, color));
+	yinc = b.y > a.y ? 1 : -1;
+	dd.x = DX;
+	dd.y = ABS(DY);
+	d = 2 * dd.y - dd.x;
+	inc.x = 2 * (dd.y - dd.x);
+	inc.y = 2 * dd.y;
+	while (a.x < b.x && PIX(a))
 	{
-		e = DX;
-		while (PIX(a) && ++a.x <= b.x)
-		{
-			if ((e += dd.y) <= 0 && ((e += dd.x) || 1))
-				a.y--;
-		}
-	}
-	else
-	{
-		e = DY;
-		while (PIX(a) && --a.y <= b.y)
-		{
-			if ((e += dd.x) > 0 && ((e += dd.y) || 1))
-				a.x++;
-		}
-	}
-}
-
-static void		bresen3
-	(t_v2 a, t_v2 b, t_fdf *fdf, unsigned int color)
-{
-	t_v2		dd;
-	int			e;
-
-	dd.x = DX * 2;
-	dd.y = DY * 2;
-	if (- dd.x >= dd.y)
-	{
-		e = DX;
-		while (PIX(a) && --a.x <= b.x)
-		{
-			if ((e += dd.y) >= 0 && ((e += dd.x) || 1))
-				a.y++;
-		}
-	}
-	else
-	{
-		e = DY;
-		while (PIX(a) && ++a.y <= b.y)
-		{
-			if ((e += dd.x) <= 0 && ((e += dd.y) || 1))
-				a.x--;
-		}
-	}
-}
-
-static void		bresen4
-	(t_v2 a, t_v2 b, t_fdf *fdf, unsigned int color)
-{
-	t_v2		dd;
-	int			e;
-
-	dd.x = DX * 2;
-	dd.y = DY * 2;
-	if (dd.x <= dd.y)
-	{
-		e = DX;
-		while (PIX(a) && --a.x <= b.x)
-		{
-			if ((e -= dd.y) >= 0 && ((e += dd.x) || 1))
-				a.y--;
-		}
-	}
-	else
-	{
-		e = DY;
-		while (PIX(a) && --a.y <= b.y)
-		{
-			if ((e -= dd.x) >= 0 && ((e += dd.y) || 1))
-				a.x--;
-		}
+		if (d > 0)
+			a.y += yinc;
+		d += d > 0 ? inc.x : inc.y;
+		a.x++;
 	}
 }
 
 void			obj_main_draw_line
 	(t_v2 a, t_v2 b, t_fdf *fdf, unsigned int color)
 {
-	if (DX > 0 && DY > 0)
-		bresen1(a, b, fdf, color);
-	else if (DX > 0)
-		bresen2(a, b, fdf, color);
-	else if (DX < 0 && DY > 0)
-		bresen3(a, b, fdf, color);
+	printf("a=%d %d, b=%d %d\n", a.x, a.y, b.x, b.y);
+	if (DX < DY)
+		bresen_y(a, b, fdf, color);
 	else
-		bresen4(a, b, fdf, color);
+		bresen_x(a, b, fdf, color);
 }

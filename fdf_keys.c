@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/01 10:18:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/02 14:12:19 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/05 11:15:29 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int			fdf_keys(int keycode, t_fdf *fdf)
 	static int	dx = 30;
 	static int	dy = 30;
 
+	printf("key %d\n", keycode);
 	if (keycode == 53)
 	{
 		mlx_destroy_window(fdf->mlx, fdf->win);

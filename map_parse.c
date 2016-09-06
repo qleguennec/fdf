@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 15:52:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/01 13:11:06 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/06 14:34:33 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ static int				parse_line(t_vect *line, t_fdf *fdf)
 	return (x);
 }
 
+static void				save(t_fdf *fdf, t_vect *max, t_vect *min)
+{
+	max->used = 0;
+	ft_memcpy(max, fdf->proj, sizeof(*max));
+	free(min->data);
+}
+
 void					map_parse(int fd, t_fdf *fdf)
 {
 	t_vect		line;
@@ -88,6 +95,7 @@ void					map_parse(int fd, t_fdf *fdf)
 			fdf_exit();
 		line.used = 0;
 	}
-	free(line.data);
-	free(gnl.data);
+	save(fdf
+		, line.used > gnl.used ? &line : &gnl
+		, line.used > gnl.used ? &gnl : &line);
 }
