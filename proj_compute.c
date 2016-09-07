@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 23:48:39 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/06 19:11:24 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/07 11:31:03 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static t_v2			map_v3_v2(t_v3 v3, t_v2 offs, t_v2 *min)
 	t_v3			tmp;
 	t_v3			iso;
 	static double	sx = 1;
-	static double	sy = - 2;
-	static double	sz = 0.2;
+	static double	sy = - 1;
+	static double	sz = 0.3;
 	static double	a = 35.264;
 	static double	b = 45;
 
