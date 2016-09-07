@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 16:07:00 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/06 13:14:42 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/07 21:57:32 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ typedef struct		s_v3
 	double			z;
 }					t_v3;
 
+typedef struct		s_square
+{
+	t_v2			a;
+	t_v2			b;
+	t_v2			c;
+	t_v2			d;
+	int				z_max;
+}					t_square;
+
 typedef struct		s_obj
 {
 	void			*img;
@@ -57,15 +66,18 @@ typedef struct		s_fdf
 	size_t			y;
 	t_vect			*map;
 	t_vect			*proj;
+	t_vect			*squares;
 	void			*mlx;
 	void			*win;
 	unsigned int	exp : 1;
 	t_obj			*obj;
+	unsigned int	color_decr;
 }					t_fdf;
 
 int					fdf_keys(int keycode, t_fdf *fdf);
 int					fdf_loop(t_fdf *fdf);
 t_v2				proj_compute(t_fdf *fdf);
+void				proj_squares(t_fdf *fdf);
 t_v2				v2_abs(t_v2 a);
 t_v2				v2_add(t_v2 a, t_v2 b);
 t_v2				v2_scale(t_v2 a, double n);
@@ -79,5 +91,6 @@ void				obj_main_draw_line(t_v2 a, t_v2 b, t_fdf *fdf, unsigned int color);
 void				obj_main_frame(t_fdf *fdf); //debug
 void				obj_main_init(t_fdf *fdf);
 int					obj_main_pixel_put(t_v2 a, t_fdf *fdf, unsigned int color);
+void				sort_quicksort(t_square *sq, size_t n);
 
 #endif

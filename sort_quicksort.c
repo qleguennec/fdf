@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_main_init.c                                    :+:      :+:    :+:   */
+/*   sort_quicksort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/31 18:22:52 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/07 19:30:28 by qle-guen         ###   ########.fr       */
+/*   Created: 2016/09/07 18:55:08 by qle-guen          #+#    #+#             */
+/*   Updated: 2016/09/07 21:42:19 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libmlx/mlx.h"
 
-void		obj_main_init(t_fdf *fdf)
+void		sort_quicksort(t_square *sq, size_t n)
 {
-	int		dummy;
+	int			i;
+	int			j;
+	int			p;
+	t_square	tmp;
 
-	fdf->obj->size = proj_compute(fdf);
-	fdf->obj->img = mlx_new_image
-		(fdf->mlx, fdf->obj->size.x, fdf->obj->size.y);
-	fdf->obj->data = (int *)mlx_get_data_addr
-		(fdf->obj->img, &dummy, &dummy, &dummy);
-	fdf->obj->pos.x = WIN_X / 2 - fdf->obj->size.x / 2;
-	fdf->obj->pos.y = WIN_Y / 2 - fdf->obj->size.y / 2;
+	if (n < 2)
+		return ;
+	p = sq[n / 2].z_max;
+	i = 0;
+	j = n - 1;
+	while (42)
+	{
+		while (sq[i].z_max < p)
+			i++;
+		while (p < sq[j].z_max)
+			j--;
+		if (i >= j)
+			break ;
+		tmp = sq[i];
+		sq[i] = sq[j];
+		sq[j] = tmp;
+		i++;
+		j--;
+	}
+	sort_quicksort(sq, i);
+	sort_quicksort(sq + i, n - i);
 }

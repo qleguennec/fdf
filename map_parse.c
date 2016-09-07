@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 15:52:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/06 19:56:36 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/07 20:40:44 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@ static int				parse_line(t_vect *line, t_fdf *fdf)
 static void				save(t_fdf *fdf, t_vect *max, t_vect *min)
 {
 	max->used = 0;
-	ft_memcpy(max, fdf->proj, sizeof(*max));
-	free(min->data);
+	min->used = 0;
+	ft_memcpy(min, fdf->proj, sizeof(*min));
+	ft_memcpy(max, fdf->squares, sizeof(*max));
 }
 
 void					map_parse(int fd, t_fdf *fdf)
