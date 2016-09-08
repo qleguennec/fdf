@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 15:47:57 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/07 21:14:10 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/08 17:59:58 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,16 @@ int			parse_args(int argc, char **argv)
 
 int			run(int fd, t_fdf *fdf)
 {
+	t_vect	map;
+	t_vect	proj;
+	t_vect	squares;
+
+	ft_bzero(&map, sizeof(map));
+	ft_bzero(&proj, sizeof(proj));
+	ft_bzero(&squares, sizeof(squares));
+	fdf->map = &map;
+	fdf->proj = &proj;
+	fdf->squares = &squares;
 	map_parse(fd, fdf);
 	fdf_init(fdf);
 	mlx_key_hook(fdf->win, &fdf_keys, fdf);
@@ -39,20 +49,12 @@ int			run(int fd, t_fdf *fdf)
 int			main(int argc, char **argv)
 {
 	int		fd;
-	t_vect	map;
-	t_vect	proj;
-	t_vect	squares;
 	t_obj	obj;
 	t_fdf	fdf;
 
 	ft_bzero(&fdf, sizeof(fdf));
-	ft_bzero(&map, sizeof(map));
-	ft_bzero(&proj, sizeof(proj));
-	ft_bzero(&squares, sizeof(squares));
 	fd = parse_args(argc, argv);
-	fdf.map = &map;
 	fdf.obj = &obj;
-	fdf.proj = &proj;
-	fdf.squares = &squares;
+	fdf.sz = SZ;
 	return (run(fd, &fdf));
 }

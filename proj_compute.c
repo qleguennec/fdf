@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 23:48:39 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/08 16:15:38 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/08 17:35:37 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 #include <limits.h>
 #include "fdf.h"
 
-static t_v3			map_v3(t_v3 v3, t_v2 offs, t_v2 *min)
+static t_v3			map_v3(t_v3 v3, t_v2 offs, t_v2 *min, t_fdf *fdf)
 {
 	t_v3			point3;
 	t_v3			tmp;
 	t_v3			iso;
 
 	point3.z = v3.z;
-	v3.x *= SX;
+	v3.x *= fdf->sz;
 	v3.y *= SY;
 	v3.z *= SZ;
 	tmp.x = cos(B_DEG) * v3.x - sin(B_DEG) * v3.z;
@@ -95,7 +95,7 @@ t_v2				proj_compute(t_fdf *fdf)
 	while (i < fdf->map->used)
 	{
 		v3.z = *((int *)(fdf->map->data + i));
-		point3 = map_v3(v3, offs, &min);
+		point3 = map_v3(v3, offs, &min, fdf);
 		vect_add(fdf->proj, &point3, sizeof(point3));
 		step(!(v3.x == (int)fdf->x - 1), &v3, &offs);
 		i += 4;

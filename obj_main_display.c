@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/30 13:34:45 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/08 15:14:08 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/08 18:06:27 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,5 @@ static void	draw_squares(t_fdf *fdf)
 
 void		obj_main_display(t_fdf *fdf)
 {
-	//draw_points(fdf, 0xffffff);
 	draw_squares(fdf);
-	return ;
 }

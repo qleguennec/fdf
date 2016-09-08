@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/07 13:23:43 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/08 15:14:04 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/08 17:52:22 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void		color_factor(t_fdf *fdf, size_t size)
 	fdf->color_decr = factor
 		? (0xffffff - 0xF5A9A9) / factor
 		: 0;
-	printf("color decr: %x\n", fdf->color_decr);
 }
 
 static void		fill

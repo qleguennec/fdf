@@ -36,6 +36,8 @@ SRC += obj_main_display.c
 SRC += fdf_exit.c
 SRC += v2_abs.c
 SRC += v2_add.c
+SRC += obj_main_scale.c
+
 
 LIB += libgnl.a
 LIB += libvect.a

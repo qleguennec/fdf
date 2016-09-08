@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 20:45:18 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/08 14:26:10 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/08 17:31:28 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void			fdf_init(t_fdf *fdf)
 	if (!fdf->win)
 		fdf_exit();
 	obj_main_init(fdf);
-	proj_squares(fdf);
 	obj_main_display(fdf);
 	fdf->exp = 1;
 }

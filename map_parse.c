@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 15:52:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/07 20:40:44 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/08 18:07:13 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "libgnl/libgnl.h"
 #include "fdf.h"
 
-static long			get_next_nbr
+static long				get_next_nbr
 	(t_vect *v, size_t *start, long ul_pow)
 {
 	int		dig;
@@ -32,7 +32,7 @@ static long			get_next_nbr
 	return (ul_pow * (dig - '0') + get_next_nbr(v, start, ul_pow / 10));
 }
 
-static int			vect_getnbr(t_vect *v, size_t *start, int *nbr)
+static int				vect_getnbr(t_vect *v, size_t *start, int *nbr)
 {
 	size_t	i;
 	int		neg;
