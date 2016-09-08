@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/30 13:34:45 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/07 22:28:14 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/08 15:14:08 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	draw_points(t_fdf *fdf, unsigned int color)
 
 	i = 0;
 	v3 = fdf->proj->data;
-	while (i < fdf->proj->used / sizeof(v3))
+	while (i < fdf->proj->used / sizeof(*v3))
 	{
 		v2.x = v3[i].x;
 		v2.y = v3[i].y;
@@ -34,7 +34,7 @@ static void	draw_squares(t_fdf *fdf)
 {
 	size_t					i;
 	t_square				*sq;
-	static unsigned int		base_col = 0xff0000;
+	static unsigned int		base_col = 0xF5A9A9;
 	long					z;
 
 	i = 0;
@@ -42,8 +42,6 @@ static void	draw_squares(t_fdf *fdf)
 	z = sq->z_max;
 	while (i < fdf->squares->used / sizeof(*sq))
 	{
-		//printf("z=%li, zi=%d, base_col=%x, color_decr=%u\n"
-		//, z, sq[i].z_max,base_col,color_decr);
 		if (sq[i].z_max != z)
 		{
 			base_col -= fdf->color_decr;
@@ -59,6 +57,7 @@ static void	draw_squares(t_fdf *fdf)
 
 void		obj_main_display(t_fdf *fdf)
 {
+	//draw_points(fdf, 0xffffff);
 	draw_squares(fdf);
 	return ;
 }

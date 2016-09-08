@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 16:07:00 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/07 21:57:32 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/08 15:55:38 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@
 # include "libft/libft.h"
 # include "libvect/libvect.h"
 # define VECT_EXIT_FUNCTION	fdf_exit()
-# define WIN_X		1000
-# define WIN_Y		1000
+# define WIN_X		1300
+# define WIN_Y		1300
+# define SX			1
+# define SY			- 1
+# define SZ			0.8
+# define A_DEG		35.264
+# define B_DEG		45
 # define WIN_NAME	"fdf"
 # define BASE_COL	0x00FF
 # define ROT		M_PI_2
@@ -56,8 +61,6 @@ typedef struct		s_obj
 	int				*data;
 	t_v2			size;
 	t_v2			pos;
-	t_v2			zoom;
-	t_v3			scale;
 }					t_obj;
 
 typedef struct		s_fdf
@@ -78,6 +81,7 @@ int					fdf_keys(int keycode, t_fdf *fdf);
 int					fdf_loop(t_fdf *fdf);
 t_v2				proj_compute(t_fdf *fdf);
 void				proj_squares(t_fdf *fdf);
+t_v2				obj_main_scale_win(t_fdf *fdf);
 t_v2				v2_abs(t_v2 a);
 t_v2				v2_add(t_v2 a, t_v2 b);
 t_v2				v2_scale(t_v2 a, double n);

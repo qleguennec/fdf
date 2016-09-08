@@ -27,6 +27,7 @@ SRC += map_parse.c
 SRC += main.c
 SRC += proj_squares.c
 SRC += fdf_loop.c
+SRC += obj_main_scale_win.c
 SRC += obj_main_pixel_put.c
 SRC += obj_main_draw_line.c
 SRC += sort_quicksort.c

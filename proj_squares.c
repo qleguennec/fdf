@@ -6,13 +6,14 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/07 13:23:43 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/07 22:14:25 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/08 15:14:04 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libvect/libvect.h"
 #include <limits.h>
+#include <math.h>
 
 static void		color_factor(t_fdf *fdf, size_t size)
 {
@@ -33,25 +34,26 @@ static void		color_factor(t_fdf *fdf, size_t size)
 		size--;
 	}
 	fdf->color_decr = factor
-		? (0xffffff - 0x0000ff) / factor
+		? (0xffffff - 0xF5A9A9) / factor
 		: 0;
+	printf("color decr: %x\n", fdf->color_decr);
 }
 
 static void		fill
 	(t_v3 *v3, t_square *sq, size_t i, size_t offs)
 {
-	sq->a.x = v3[i].x;
-	sq->a.y = v3[i].y;
-	sq->b.x = v3[i + 1].x;
-	sq->b.y = v3[i + 1].y;
-	sq->c.x = v3[i + 1 + offs].x;
-	sq->c.y = v3[i + 1 + offs].y;
-	sq->d.x = v3[i + offs].x;
-	sq->d.y = v3[i + offs].y;
-	sq->z_max = v3[i].z;
-	sq->z_max = MAX(sq->z_max, v3[i + 1].z);
-	sq->z_max = MAX(sq->z_max, v3[i + offs].z);
-	sq->z_max = MAX(sq->z_max, v3[i + offs + 1].z);
+	sq->a.x = ceil(v3[i].x);
+	sq->a.y = ceil(v3[i].y);
+	sq->b.x = ceil(v3[i + 1].x);
+	sq->b.y = ceil(v3[i + 1].y);
+	sq->c.x = ceil(v3[i + 1 + offs].x);
+	sq->c.y = ceil(v3[i + 1 + offs].y);
+	sq->d.x = ceil(v3[i + offs].x);
+	sq->d.y = ceil(v3[i + offs].y);
+	sq->z_max = ceil(v3[i].z);
+	sq->z_max = MAX(sq->z_max, ceil(v3[i + 1].z));
+	sq->z_max = MAX(sq->z_max, ceil(v3[i + offs].z));
+	sq->z_max = MAX(sq->z_max, ceil(v3[i + offs + 1].z));
 }
 
 void			proj_squares(t_fdf *fdf)
