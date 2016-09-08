@@ -6,15 +6,13 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 16:07:00 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/08 18:16:04 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/08 18:22:07 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include <stdio.h>
-# include <assert.h>
 # include "libft/libft.h"
 # include "libvect/libvect.h"
 # define VECT_EXIT_FUNCTION	fdf_exit()

@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/31 18:22:52 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/08 18:03:53 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/08 18:42:42 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void		obj_main_init(t_fdf *fdf)
 	fdf->obj->size = obj_main_scale_win(fdf);
 	fdf->obj->size.x++;
 	fdf->obj->size.y++;
-	proj_squares(fdf);
+	if (fdf->y > 1)
+		proj_squares(fdf);
 	fdf->obj->img = mlx_new_image(fdf->mlx
 		, fdf->obj->size.x, fdf->obj->size.y);
 	if (!fdf->obj->img)

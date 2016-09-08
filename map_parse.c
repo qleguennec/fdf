@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 15:52:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/08 18:07:13 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/08 18:39:47 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void					map_parse(int fd, t_fdf *fdf)
 			fdf_exit();
 		line.used = 0;
 	}
+	if (!fdf->map->used)
+		fdf_exit();
 	save(fdf
 		, line.used > gnl.used ? &line : &gnl
 		, line.used > gnl.used ? &gnl : &line);
