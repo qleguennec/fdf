@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/29 16:07:00 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/09/08 18:13:59 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/09/08 18:16:04 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,6 @@ t_v2				obj_main_scale(t_v3 sf, t_fdf *fdf);
 t_v2				obj_main_scale_win(t_fdf *fdf);
 t_v2				proj_compute(t_fdf *fdf);
 t_v2				v2_abs(t_v2 a);
-t_v2				v2_add(t_v2 a, t_v2 b);
-t_v2				v2_scale(t_v2 a, double n);
-t_v3				v3_transform(t_v3 v3, t_fdf *fdf);
 void				fdf_exit(void);
 void				fdf_init(t_fdf *fdf);
 void				map_parse(int fd, t_fdf *fdf);
